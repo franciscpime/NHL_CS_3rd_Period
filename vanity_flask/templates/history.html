@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>History</title>
+</head>
+<body>
+
+    <h1>History</h1>
+
+    <a href="/">Check Plate</a>
+    <a href="/history">History</a>
+
+    <hr>
+
+    <!-- Table displaying all previous checks -->
+    <table border="5">
+        <!-- Table header row -->
+        <tr>
+            <th>Plate</th>
+            <th>Result</th>
+        </tr>
+
+        <!-- Loop through all records sent from Flask -->
+        {% for plate in plates %}
+        <tr>
+            <!-- Show plate text -->
+            <td>{{ plate.plate }}</td>
+
+            <!-- Show validation result -->
+            <td>
+                <!-- valid stored as 1 -->
+                {% if plate.valid == 1 %}
+                    Valid
+                <!-- valid stored as 0 -->
+                {% else %}
+                    Invalid
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+
+    </table>
+
+</body>
+</html>

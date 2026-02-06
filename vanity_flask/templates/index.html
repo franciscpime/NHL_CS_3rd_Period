@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Vanity Plates</title>
+</head>
+<body>
+
+    <h1>Vanity Plates Checker</h1>
+
+    <a href="/">Check Plate</a>
+    <a href="/history">History</a>
+
+    <hr>
+
+    <h2>Check a plate</h2>
+
+    <!-- Form sends data to the same route ("/") using POST method -->
+    <form method="post">
+        <input type="text" name="plate">
+        <button type="submit">Check</button>
+    </form>
+
+    <br>
+        <!-- Only show this block after a form submission -->
+        {% if result is defined %}
+            <!-- If plate is valid -->
+            {% if result %}
+                <p>Valid plate: {{ plate }}</p>
+
+            <!-- If plate is invalid -->
+            {% else %}
+                <p>Invalid plate: {{ plate }}</p>
+            {% endif %}
+        {% endif %}
+</body>
+</html>
