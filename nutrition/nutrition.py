@@ -27,5 +27,4 @@ if item in fruits:
     print(f"Calories: {fruits[item]}")
 else:
     print()
-
     
