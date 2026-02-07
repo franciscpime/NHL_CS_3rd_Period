@@ -49,4 +49,27 @@ class Stats:
         self.hp = self.max_hp
 
 
+    def modify_attack(self, amount):
+        self.attack += amount
+
+        if self.attack < 0:
+            self.attack = 0
     
+
+    def modify_defense(self, amount):
+        self.defense += amount
+
+        if self.defense < 0:
+            self.defense = 0
+    
+
+    def modify_max_hp(self, amount):
+        self.max_hp += amount
+
+        self.max_hp = max(self.max_hp, 1)
+
+        if self.hp > self.max_hp:
+            self.hp = self.max_hp
+        
+        
+        
