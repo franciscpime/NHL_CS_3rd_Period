@@ -45,28 +45,35 @@ def menu():
 
 
 def extension():
+    print()
     print("You find a file named 'recipe.pdf'.")
     
     file = input("Type the name of the file to check its extension: ")
+    print()
 
     if file == "recipe.pdf":
         print("This is a PDF file containing a recipe!")
+        print()
     else:
         print("Unknown file type!")
+        print()
     
     menu()
 
 
 def math():
+    print()
     print("A safe unlocks only with the correct mathematical calculation.")
 
     while True:
         expression = input("Enter the mathematical expression: ")
+        print()
 
         allowed = "0123456789+-*/"
 
         if any(c not in allowed for c in expression):
             print("Invalid characters!")
+            print()
             continue
 
         try:
@@ -74,12 +81,15 @@ def math():
 
             if result == 14:
                 print(f"The result is: {result}. The safe opens!")
+                print()
                 break
             else:
                 print(f"{result} is incorrect... the safe remains locked.")
+                print()
 
         except:
             print("That is not a valid mathematical expression!")
+            print()
     
     menu()
 
@@ -141,10 +151,26 @@ def camelCase():
 
 
 
-# def guessing():
+def guessing():
+    print()
+    print("A secret code (between 1 and 10) must be guessed.")
+    print()
 
+    answer = 7
+    guess = int(input("Guess the code (attempts left: 3): "))
 
+    for i in range(3):
+        if guess < answer:
+            print("Too low!")
+            print()
+        elif guess > answer:
+            print("Too high!")
+            print()
+        else:
+            print("Correct! The door opens.")
+            break
 
+    menu()
 
 
 # def bitcoin():
@@ -164,7 +190,9 @@ def emojize():
     if a == "apple" and b == "banana" and c == "cookie":
         print("Correct! You receive a key.")
     else:
-        print("Wrong! try again.")
+        print("That's not correct. Try again!")
+
+    menu()
 
 # def felipe():
 
