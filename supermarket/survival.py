@@ -157,20 +157,25 @@ def guessing():
     print()
 
     answer = 7
-    guess = int(input("Guess the code (attempts left: 3): "))
+    attempts = 3
 
-    for i in range(3):
+    for i in range(attempts):
+        guess = int(input(f"Guess the code (attempts left: {attempts - i}): "))
+        print()
+
         if guess < answer:
             print("Too low!")
-            print()
         elif guess > answer:
             print("Too high!")
-            print()
         else:
             print("Correct! The door opens.")
             break
+    else:
+        print("You failed! The door remains closed.")
 
+    print()
     menu()
+
 
 
 # def bitcoin():
