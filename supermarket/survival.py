@@ -123,13 +123,31 @@ def meal():
     menu()
 
 
-# def coke():
+def coke():
+    price = 50
 
+    while price > 0:
+        print()
+        print((f"Amount Due: {price}"))
+        amount = int(input("Insert coin: "))
+
+        if amount == 25:
+            price -= 25
+        elif amount == 10:
+            price -= 10
+        elif amount == 5:
+            price -= 5
+
+
+    change = abs(price)
+    print(f"Change Owed: {change}")
+    print()
+    menu()
 
 
 def camelCase():
     print()
-    print("You find a message in CamelCase: 'EscapeNowThroughDoor'.")
+    print("You find a message in CamelCase: E.g. 'EscapeNowThroughDoor'.")
     message = input("Type the CamelCase message to decode it: ")
 
     transformed = ""
@@ -179,8 +197,6 @@ def guessing():
 
 
 # def bitcoin():
-
-
 
 
 
