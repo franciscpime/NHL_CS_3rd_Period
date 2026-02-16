@@ -1,9 +1,18 @@
-text = input("Input: ")
+def main():
+    message = input("Input: ")
+    print("Output: ", shorten(message), sep="")
 
-vowels = "aeiouAEIOU"
 
-for c in text:
-    if c not in vowels:
-        print(c, end="")
+
+def shorten(word):
+    vowels = "aeiouAEIOU"
+
+    for c in word:
+        if c not in vowels:
+            print(c, end="")
 
 print()
+
+
+if __name__ == "__main__":
+    main()

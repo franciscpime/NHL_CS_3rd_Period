@@ -1,28 +1,26 @@
-fraction = input("Fraction: ")
+while True:
+    try:
+        fraction = input("Fraction: ")
 
-x, z = fraction.split("/")
+        x, z = fraction.split("/")
 
-n1 = int(x)
-n2 = int(z)
+        n1 = int(x)
+        n2 = int(z)
 
-try:
-    result = n1 / n2
-    final_result = result * 100
-        
-    if final_result >= 99:
-        print("F")
-    elif final_result <= 1:
-        print("E")
-    else:
-        print(f"{final_result:.0f}%")
+        # validação obrigatória
+        if n1 < 0 or n2 <= 0 or n1 > n2:
+            continue
 
-except ValueError:
-    if not n1.isdigit() or not n2.isdigit():
-        ValueError
-    elif n1 < 0 or n2 < 0:
-        ValueError
-    elif n1 > n2:
-        ValueError
-except ZeroDivisionError:
-    if n2 == 0:
-        print(ZeroDivisionError)
+        percent = round((n1 / n2) * 100)
+
+        if percent >= 99:
+            print("F")
+        elif percent <= 1:
+            print("E")
+        else:
+            print(f"{percent}%")
+
+        break
+
+    except (ValueError, ZeroDivisionError):
+        pass
