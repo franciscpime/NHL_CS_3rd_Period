@@ -11,6 +11,7 @@ try:
 
 except EOFError:
     pass
+    print()
 
 for item in sorted(groceries):
     print(groceries[item], item)
