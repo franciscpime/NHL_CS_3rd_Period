@@ -7,16 +7,12 @@ def shorten(word):
     vowels = "aeiouAEIOU"
     transformed = ""
 
-    if word.isdigit():
-        return "Just Letters!"
-    elif word == " ":
-        return "Write Something!" 
-
     for c in word:
         if c not in vowels:
             transformed += c
+        else:
+            transformed += ""
         
-
     return transformed
 
 
