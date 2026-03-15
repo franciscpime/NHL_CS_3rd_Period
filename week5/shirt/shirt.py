@@ -7,20 +7,20 @@ if len(sys.argv) < 3:
 elif len(sys.argv) > 3:
     sys.exit("Too many command-line arguments")
 
-# Validate that the input file has an allowed extension
+# Validate extensions
 elif not sys.argv[1].endswith((".jpg", ".jpeg", ".png")):
     sys.exit("Invalid input")
-
-# Validate that the output file has an allowed extension
 elif not sys.argv[2].endswith((".jpg", ".jpeg", ".png")):
-    sys.exit("Invalid input")
+    sys.exit("Invalid output")
 
-# Ensure that input and output files share the same extension
+# Ensure extensions match
 elif sys.argv[1].split(".")[-1] != sys.argv[2].split(".")[-1]:
     sys.exit("Input and output have different extensions")
 
-# Open the input image provided by the user
-input_image = Image.open(sys.argv[1])
+try:
+    input_image = Image.open(sys.argv[1])
+except FileNotFoundError:
+    sys.exit("Input does not exist")
 
 # Open the shirt overlay image
 shirt = Image.open("shirt.png")
@@ -33,3 +33,4 @@ fitted.paste(shirt, shirt)
 
 # Save the final image to the output file specified by the user
 fitted.save(sys.argv[2])
+
