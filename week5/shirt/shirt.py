@@ -17,6 +17,7 @@ elif not sys.argv[2].endswith((".jpg", ".jpeg", ".png")):
 elif sys.argv[1].split(".")[-1] != sys.argv[2].split(".")[-1]:
     sys.exit("Input and output have different extensions")
 
+# Try to open the file, if it doesn't exist >> Error
 try:
     input_image = Image.open(sys.argv[1])
 except FileNotFoundError:
@@ -25,12 +26,12 @@ except FileNotFoundError:
 # Open the shirt overlay image
 shirt = Image.open("shirt.png")
 
-# Resize and crop the input image to match the shirt's dimensions
+# Resize and crop the input image so it has the same size as the shirt
 fitted = ImageOps.fit(input_image, shirt.size)
 
-# Overlay the shirt image on top of the resized image using transparency
+# Put the shirt image on top of the resized image
 fitted.paste(shirt, shirt)
 
-# Save the final image to the output file specified by the user
+# Save the final image to the output file
 fitted.save(sys.argv[2])
 
