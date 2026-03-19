@@ -2,7 +2,7 @@ def main() -> None:
 
     s = input(" Write something: ")
 
-    if is_palindrome:
+    if is_palindrome(s):
         print("Nice")
     else:
         print("Bad")
