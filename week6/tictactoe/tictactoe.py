@@ -11,18 +11,14 @@ EMPTY = None
 
 
 def initial_state():
-    """
-    Returns starting state of the board.
-    """
+    # Returns starting state of the board.
     return [[EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY],
             [EMPTY, EMPTY, EMPTY]]
 
 
+# Returns player who has the next turn on a board
 def player(board):
-    """
-    Returns player who has the next turn on a board.
-    """
     
     count_X = 0
     count_O = 0
@@ -42,10 +38,9 @@ def player(board):
         return O
 
 
+# Returns set of all possible actions (i, j) available on the board.
 def actions(board):
-    """
-    Returns set of all possible actions (i, j) available on the board.
-    """
+    
     possible_actions = set()
 
     # Iterate through the board and collect empty positions
@@ -57,10 +52,9 @@ def actions(board):
     return possible_actions
 
 
+# Returns the board that results from making move (i, j) on the board
 def result(board, action):
-    """
-    Returns the board that results from making move (i, j) on the board.
-    """
+    
     if action not in actions(board):
         raise Exception
 
@@ -77,10 +71,9 @@ def result(board, action):
     return new_board
 
 
+# Returns the winner of the game, if there is one
 def winner(board):
-    """
-    Returns the winner of the game, if there is one.
-    """
+    
     # Check the rows
     for i in range(3):
         if board[i][0] == board[i][1] == board[i][2] != EMPTY:
@@ -101,10 +94,9 @@ def winner(board):
     return None
 
 
+# Returns True if game is over, False otherwise
 def terminal(board):
-    """
-    Returns True if game is over, False otherwise.
-    """
+
     # If someone has won, the game is finished
     if winner(board) != None:
         return True
@@ -119,10 +111,9 @@ def terminal(board):
     return True
 
 
+# Returns 1 if X has won the game, -1 if O has won, 0 otherwise
 def utility(board):
-    """
-    Returns 1 if X has won the game, -1 if O has won, 0 otherwise.
-    """
+    
     w = winner(board)
 
     if w == X:
@@ -133,6 +124,7 @@ def utility(board):
         return 0
 
 
+# Returns the maximum value of the board
 def max_value(board):
     if terminal(board):
         return utility(board)
@@ -143,6 +135,7 @@ def max_value(board):
     return v
 
 
+# Returns the minimum value of the board
 def min_value(board):
     if terminal(board):
         return utility(board)
@@ -153,10 +146,8 @@ def min_value(board):
     return v
 
 
+# Returns the optimal action for the current player on the board
 def minimax(board):
-    """
-    Returns the optimal action for the current player on the board.
-    """
     # If the game is already finished, no move can be made
     if terminal(board):
         return None
@@ -174,7 +165,6 @@ def minimax(board):
             if score > best_score:
                 best_score = score
                 best_action = action
-
     else:
         best_score = float("inf")
 
@@ -188,10 +178,8 @@ def minimax(board):
     return best_action
 
 
+# Returns the best action and its explanation for the current player on the board
 def explain_move(board):
-    """
-    Returns (best_action, explanation)
-    """
 
     if terminal(board):
         return None, "Game is already over."
@@ -201,22 +189,24 @@ def explain_move(board):
 
     best_action = minimax(board)
 
-    # --- Helper: check if a move leads to a win ---
+
+    # Helper: check if a move leads to a win
     def is_winning_move(board, action, p):
         new_board = result(board, action)
         return winner(new_board) == p
 
-    # --- 1. Immediate win ---
+    # Immediate win
     if is_winning_move(board, best_action, current):
         return best_action, "This move wins the game immediately."
 
-    # --- 2. Block opponent win ---
+    # Block opponent win
     for action in actions(board):
         if is_winning_move(board, action, opponent):
             if action == best_action:
                 return best_action, "This move blocks the opponent from winning on their next turn."
 
-    # --- Helper: count winning moves after a move (fork detection) ---
+
+    # Helper: count how many winning moves a player has after a move
     def count_winning_moves(board, p):
         count = 0
         for action in actions(board):
@@ -224,19 +214,20 @@ def explain_move(board):
                 count += 1
         return count
 
-    # --- 3. Create fork ---
+
+    # Create fork
     new_board = result(board, best_action)
     if count_winning_moves(new_board, current) >= 2:
         return best_action, "This move creates a fork, giving multiple ways to win."
 
-    # --- 4. Block opponent fork ---
+    # Block opponent fork
     for action in actions(board):
         new_board = result(board, action)
         if count_winning_moves(new_board, opponent) >= 2:
             if action == best_action:
                 return best_action, "This move blocks the opponent from creating a fork."
 
-    # --- 5. Minimax explanation ---
+    # Minimax explanation
     score = None
     if current == X:
         score = max(
