@@ -23,7 +23,6 @@ base_rules = And(
     Not(And(CKnight, CKnave))
 )
 
-
 # Puzzle 0
 # A says "I am both a knight and a knave."
 knowledge0 = And(
